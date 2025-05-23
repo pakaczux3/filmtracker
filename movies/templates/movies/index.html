@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Moje Filmy</title>
+    <link rel="manifest" href="{% static 'movies/manifest.json' %}">
+    <meta name="theme-color" content="#333">
+    <link rel="stylesheet" href="{% static 'movies/style.css' %}">
+</head>
+<body>
+    <h1>📽️ Moje Filmy</h1>
+
+    <section>
+    <h2>Dodaj film</h2>
+    <form id="add-form">
+        <label for="title">Tytuł:</label>
+        <input type="text" id="title" placeholder="Tytuł" required>
+        <label for="description">Opis:</label>
+        <textarea id="description" placeholder="Opis"></textarea>
+        <button type="submit">Dodaj</button>
+    </form>
+</section>
+
+    <section>
+        <h2>🎬 Do obejrzenia</h2>
+        <ul id="to-watch-list"></ul>
+    </section>
+
+    <section>
+        <h2>✅ Obejrzałem</h2>
+        <ul id="watched-list"></ul>
+    </section>
+
+    <script src="{% static 'movies/app.js' %}"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register("{% static 'movies/service-worker.js' %}")
+                .then(reg => console.log("SW zarejestrowany"))
+                .catch(err => console.error("SW błąd:", err));
+        }
+    </script>
+</body>
+</html>
